@@ -2,6 +2,8 @@ version: '3'
 services:
   grafana:
    image: grafana/grafana:latest
+   environment:
+    GF_INSTALL_PLUGINS: "grafana-clock-panel,grafana-simple-json-datasource,grafana-worldmap-panel,grafana-piechart-panel"
    ports:
     - "3000:3000"
    volumes:
@@ -17,6 +19,12 @@ services:
     image: grafana/promtail:2.0.0
     volumes:
       - "/var/log:/var/log"
+
+  prometheus:
+    image: prom/prometheus:latest
+    ports:
+      - "9090:9090"
+
 
 volumes:
   loki:
